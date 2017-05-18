@@ -1,4 +1,4 @@
-#!/home/johnvoon/payslip-generator-api/venv/bin/python
+#!/home/johnvoon/payslip-generator-api/venv/bin/python3
 
 # -*- coding: utf-8 -*-
 import re

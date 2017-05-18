@@ -3,26 +3,19 @@ import os
 from flask import Flask
 from flask_restful import Api
 
-from security import authenticate, identity
-from resources.user import UserRegister
-from resources.item import Item, ItemList
-from resources.store import Store, StoreList
+from resources.payslip import Payslip
 
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'john'
+app.secret_key = 'secret_key'
 api = Api(app)
 
-api.add_resource(Store, '/store/<string:name>')
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(ItemList, '/items')
-api.add_resource(StoreList, '/stores')
-
-api.add_resource(UserRegister, '/register')
+api.add_resource(Payslip, '/api/generate_payslip_csv')
 
 if __name__ == '__main__':
     from db import db
